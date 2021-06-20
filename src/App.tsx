@@ -1,5 +1,8 @@
 import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+
+import { Search, RepositoryDetail } from './pages';
 
 import './App.scss';
 
@@ -14,7 +17,18 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className='App'></div>
+      <Router>
+        <Switch>
+          {/* Search */}
+          <Route exact path='/' component={Search} />
+
+          {/* Detail */}
+          <Route exact path='/repositories/:id' component={RepositoryDetail} />
+
+          {/* Default Path */}
+          <Redirect to='/' />
+        </Switch>
+      </Router>
     </QueryClientProvider>
   );
 }
