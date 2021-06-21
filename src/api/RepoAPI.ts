@@ -1,18 +1,37 @@
-export interface SearchOptions {
+import axios from 'axios';
+
+import { Repository } from '../utils/models/Repository';
+
+export interface RepoSearchOptions {
   page: number;
-  per_page?: number;
-  sort: 'stars' | 'forks' | 'help-wanted-issues' | 'updated';
-  order: 'asc' | 'desc';
+  sort: string;
+  language?: string;
 }
 
-export const search = (query: string, options: SearchOptions) => {
-  const { page } = options;
-  return fetch(`https://api.github.com/search/repositories?q=${query}&page=${page}`)
-    .then((res) => res.json())
-    .then((res) => res)
-    .catch((error) => {
-      throw new Error(error.message);
-    });
+export interface RepoSearchResponse {
+  items: Repository[];
+  total_count: number;
+}
+
+export const searchRepos = async (
+  query: string,
+  options: RepoSearchOptions
+): Promise<RepoSearchResponse> => {
+  const { page, sort = '', language = '' } = options;
+  const queryString = `q=${query}+language:${language}&page=${page}&sort=${sort}&per_page=20`;
+  const error = `We're having trouble fetching your search, please try again.`;
+
+  try {
+    const { status, data } = await axios.get(
+      `https://api.github.com/search/repositories?${queryString}`
+    );
+
+    if (status === 403) throw new Error(error);
+
+    return data;
+  } catch (err) {
+    throw new Error(error);
+  }
 };
 
 export const getRepo = (owner: string, repo: string) => {
