@@ -23,7 +23,7 @@ function App() {
           <Route exact path='/' component={Search} />
 
           {/* Detail */}
-          <Route exact path='/repositories/:id' component={RepositoryDetail} />
+          <Route exact path='/repositories/:owner/:repo' component={RepositoryDetail} />
 
           {/* Default Path */}
           <Redirect to='/' />
