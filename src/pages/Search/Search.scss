@@ -1,0 +1,12 @@
+.ui.form .field:last-child, .ui.form .fields:last-child .field {
+  margin-bottom: .5em;
+}
+
+.list-item {
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
