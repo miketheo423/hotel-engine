@@ -1,7 +1,7 @@
 import { useState, useEffect, ChangeEvent, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Container, Form, List, Loader, Pagination } from 'semantic-ui-react';
+import { Form, Icon, Loader, Pagination } from 'semantic-ui-react';
 import { Count } from '../../components';
 
 import { useQuery, useQueryClient } from 'react-query';
@@ -69,12 +69,12 @@ const Search = () => {
     setPage(1);
   }, [debouncedSearch]);
 
-  // console.log('data', data);
+  useEffect(() => {}, [debouncedSearch]);
 
   const handlePageChange = useCallback((_, data) => setPage(data.activePage), [setPage]);
 
   return (
-    <Container text>
+    <main className='search'>
       <h1>Repositories</h1>
       <Form>
         <Form.Input
@@ -118,22 +118,23 @@ const Search = () => {
 
       {/* Success */}
       {items?.length ? (
-        <List divided relaxed>
+        <ul className='search__results'>
           {items?.map(({ id, full_name, stargazers_count }) => {
             return (
-              <List.Item className='list-item' key={id}>
-                <List.Icon name='github' size='large' verticalAlign='middle' />
-                <List.Content>
-                  <Link to={`/repositories/${full_name}`} className='list-item__link'>
-                    <List.Header>{full_name}</List.Header>
-                    <Count icon='star' count={stargazers_count} />
-                  </Link>
-                  {/* <List.Description>Updated 10 mins ago</List.Description> */}
-                </List.Content>
-              </List.Item>
+              <li className='search__results-item' key={id}>
+                <div className='content'>
+                  <div className='content__title-container'>
+                    <Icon name='github' size='large' />
+                    <Link to={`/repositories/${full_name}`} className='list-item__link'>
+                      <p>{full_name}</p>
+                    </Link>
+                  </div>
+                  <Count icon='star' count={stargazers_count} />
+                </div>
+              </li>
             );
           })}
-        </List>
+        </ul>
       ) : null}
 
       {/* Empty */}
@@ -141,7 +142,7 @@ const Search = () => {
 
       {/* Pagination */}
       {items?.length && (
-        <Container textAlign='center'>
+        <div className='search__pagination-container'>
           <Pagination
             defaultActivePage={page}
             totalPages={totalPages}
@@ -151,9 +152,9 @@ const Search = () => {
             lastItem={null}
             ellipsisItem={null}
           />
-        </Container>
+        </div>
       )}
-    </Container>
+    </main>
   );
 };
 

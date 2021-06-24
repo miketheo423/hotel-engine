@@ -1,12 +1,29 @@
 .ui.form .field:last-child, .ui.form .fields:last-child .field {
   margin-bottom: .5em;
 }
+.search {
 
-.list-item {
+  &__results {
 
-  &__link {
+    &-item {
+
+      margin-bottom: 1em;
+
+      .content {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        &__title-container {
+          display: flex;
+        }
+      }
+    }
+  }
+
+  &__pagination-container {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    padding: 1em 0;
   }
 }
