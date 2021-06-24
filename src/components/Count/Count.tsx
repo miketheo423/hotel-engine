@@ -3,9 +3,13 @@ import { memo } from 'react';
 import { Icon } from 'semantic-ui-react';
 import { SemanticICONS } from 'semantic-ui-react/dist/commonjs/generic';
 
-interface CountProps {
+import './Count.scss';
+
+export interface CountProps {
   count: number;
   icon?: SemanticICONS;
+  title?: string;
+  className?: string;
 }
 
 const getDisplayCount = (count: number) => {
@@ -14,12 +18,13 @@ const getDisplayCount = (count: number) => {
     : Math.sign(count) * Math.abs(count);
 };
 
-const Count = ({ count, icon }: CountProps) => {
+const Count = ({ count, icon, title = '', className = '' }: CountProps) => {
   const displayCount = getDisplayCount(count);
 
   return (
-    <span className='count'>
-      {icon && <Icon name={icon} size='small' />}
+    <span className={`count ${className}`}>
+      {icon && <Icon name={icon} size='small' className='count__icon' />}
+      {title && <span className='count__title'>{title}</span>}
       {displayCount}
     </span>
   );

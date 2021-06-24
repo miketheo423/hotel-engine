@@ -35,9 +35,9 @@ export const searchRepos = async (
 };
 
 export const getRepo = (owner: string, repo: string) => {
-  return fetch(`https://api.github.com/repos/${owner}/${repo}`)
-    .then((res) => res.json())
-    .then((res) => res)
+  return axios
+    .get(`https://api.github.com/repos/${owner}/${repo}`)
+    .then((res) => res.data)
     .catch((error) => {
       throw new Error(error.message);
     });
