@@ -67,7 +67,7 @@ const Search = () => {
   // Reset the page number to 1 if the input changes
   useEffect(() => {
     setPage(1);
-  }, [debouncedSearch]);
+  }, [debouncedSearch, sort, language]);
 
   useEffect(() => {}, [debouncedSearch]);
 
@@ -111,7 +111,7 @@ const Search = () => {
         </Form.Group>
       </Form>
 
-      <Loader active={isLoading} />
+      <Loader active={isLoading} data-testid='loader' />
 
       {/* Error */}
       {error && !items?.length && <p>{error.message}</p>}
