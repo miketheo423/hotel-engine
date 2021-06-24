@@ -1,3 +1,8 @@
+export interface Owner {
+  avatar_url: string;
+  login: string;
+}
+
 export interface Repository {
   id: number;
   name: string;
@@ -10,4 +15,6 @@ export interface Repository {
   subscribers_count: number;
   forks_count: number;
   open_issues_count: number;
+  // owner
+  owner: Owner;
 }
