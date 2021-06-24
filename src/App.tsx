@@ -4,8 +4,6 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { Search, RepositoryDetail } from './pages';
 
-import './App.scss';
-
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {

@@ -87,14 +87,18 @@ html {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
+html, body {
+  min-height: 100vh;
+}
+
+#root {
+  height: 100%;
+}
+
 body {
   padding: 1em;
   max-width: 900px;
   margin: 0 auto;
-}
-
-html, body {
-  height: auto;
 }
 
 h1 {
