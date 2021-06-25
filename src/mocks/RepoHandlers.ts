@@ -1,8 +1,12 @@
 import { rest } from 'msw';
+import { mockRepositories } from './../utils/mocks/mockRepositories';
 
 const RepoHandlers = [
   rest.get('https://api.github.com/search/repositories', (_, res, ctx) => {
-    return res(ctx.status(200), ctx.json({ items: [], total_count: 0 }));
+    return res(
+      ctx.status(200),
+      ctx.json({ items: mockRepositories, total_count: mockRepositories.length })
+    );
   }),
 ];
 
