@@ -16,6 +16,8 @@
 
         &__title-container {
           display: flex;
+          max-width: 85%;
+          word-break: break-word;
         }
       }
     }

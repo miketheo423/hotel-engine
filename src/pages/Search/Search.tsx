@@ -111,7 +111,7 @@ const Search = () => {
         </Form.Group>
       </Form>
 
-      <Loader active={isLoading} data-testid='loader' />
+      {isLoading && <Loader active={isLoading} />}
 
       {/* Error */}
       {error && !items?.length && <p>{error.message}</p>}

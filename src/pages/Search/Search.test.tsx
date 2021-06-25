@@ -8,12 +8,16 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
+import { MemoryRouter } from 'react-router-dom';
+
 const setup = () =>
   render(
     <QueryClientProvider
       client={new QueryClient({ defaultOptions: { queries: { retry: false } } })}
     >
-      <Search />
+      <MemoryRouter initialEntries={['/']}>
+        <Search />
+      </MemoryRouter>
     </QueryClientProvider>
   );
 
@@ -33,7 +37,5 @@ describe('<Search />', () => {
         sort: 'default',
       });
     });
-
-    screen.debug();
   });
 });
